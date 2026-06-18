@@ -1,0 +1,47 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    Ícone Emmi Empresarial
+    Estilo Cormorant Garamond: traços clássicos, alto contraste, elegância editorial.
+    Bowl do "e" com crossbar horizontal refinado + ponto que evoca o "i" do logo.
+    Cor: Terracota Dourado #906a47
+  -->
+
+  <!-- Bowl do "e" — arco 270°, abertura à direita, traço mais fino (alto contraste) -->
+  <path
+    fill="none"
+    stroke="#906a47"
+    stroke-width="9"
+    stroke-linecap="butt"
+    d="M 151.7 46.3 A 76 76 0 1 0 151.7 153.7"
+  />
+
+  <!-- Crossbar horizontal — refinada, clássica, como no Cormorant Garamond -->
+  <line
+    x1="24" y1="100"
+    x2="150" y2="100"
+    stroke="#906a47"
+    stroke-width="7"
+    stroke-linecap="butt"
+  />
+
+  <!-- Terminal superior do bowl — serifado, espessura maior -->
+  <line
+    x1="147" y1="46.3"
+    x2="160" y2="46.3"
+    stroke="#906a47"
+    stroke-width="9"
+    stroke-linecap="round"
+  />
+
+  <!-- Terminal inferior do bowl -->
+  <line
+    x1="147" y1="153.7"
+    x2="160" y2="153.7"
+    stroke="#906a47"
+    stroke-width="9"
+    stroke-linecap="round"
+  />
+
+  <!-- Ponto circular — evoca o "i" do logo e a identidade da marca -->
+  <circle cx="166" cy="100" r="8" fill="#906a47"/>
+</svg>
