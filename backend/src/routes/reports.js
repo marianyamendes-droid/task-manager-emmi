@@ -4,15 +4,25 @@ const auth = require('../middleware/auth');
 
 router.get('/dashboard', auth, async (req, res) => {
   try {
-    const [total, byStatus, byPriority, overdue, upcoming] = await Promise.all([
+    const [total, byStatus, byPriority, overdue, upcoming, byClient] = await Promise.all([
       db.query('SELECT COUNT(*) FROM tasks'),
       db.query(`SELECT status, COUNT(*) FROM tasks GROUP BY status`),
       db.query(`SELECT priority, COUNT(*) FROM tasks GROUP BY priority`),
       db.query(`SELECT COUNT(*) FROM tasks WHERE due_date < NOW() AND status NOT IN ('completed')`),
-      db.query(`SELECT t.*, u.name as assigned_to_name, c.name as category_name, c.color as category_color
+      db.query(`SELECT t.*, u.name as assigned_to_name, c.name as category_name, c.color as category_color, cl.name as client_name
         FROM tasks t LEFT JOIN users u ON u.id=t.assigned_to LEFT JOIN categories c ON c.id=t.category_id
+        LEFT JOIN clients cl ON cl.id=t.client_id
         WHERE t.due_date BETWEEN NOW() AND NOW() + INTERVAL '3 days' AND t.status != 'completed'
         ORDER BY t.due_date ASC LIMIT 5`),
+      db.query(`SELECT cl.name, cl.id,
+        COUNT(t.id) as total,
+        COUNT(t.id) FILTER (WHERE t.status != 'completed') as pendentes,
+        COUNT(t.id) FILTER (WHERE t.status = 'completed') as concluidas,
+        COUNT(t.id) FILTER (WHERE t.due_date < NOW() AND t.status != 'completed') as atrasadas
+        FROM clients cl
+        LEFT JOIN tasks t ON t.client_id = cl.id
+        GROUP BY cl.id, cl.name
+        ORDER BY total DESC LIMIT 10`),
     ]);
 
     res.json({
@@ -21,6 +31,7 @@ router.get('/dashboard', auth, async (req, res) => {
       byPriority: byPriority.rows,
       overdue: parseInt(overdue.rows[0].count),
       upcoming: upcoming.rows,
+      byClient: byClient.rows,
     });
   } catch (err) {
     res.status(500).json({ error: err.message });

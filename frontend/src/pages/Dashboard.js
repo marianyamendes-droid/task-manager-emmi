@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api';
 import { Link } from 'react-router-dom';
-import { CheckCircle, Clock, AlertTriangle, ListTodo, ArrowRight } from 'lucide-react';
+import { CheckCircle, Clock, AlertTriangle, ListTodo, ArrowRight, Briefcase } from 'lucide-react';
 import { format, isPast } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 
@@ -43,6 +43,45 @@ export default function Dashboard() {
         <StatCard icon={AlertTriangle} label="Em atraso"      value={data.overdue}          iconBg="#7a3a2a" />
       </div>
 
+      {data.byClient && data.byClient.length > 0 && (
+        <div className="rounded-xl shadow-sm border p-5" style={{ backgroundColor: '#f4e4c3', borderColor: '#d4c4a8' }}>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="font-semibold flex items-center gap-2" style={{ color: '#2e313c', fontFamily: 'Cormorant Garamond, serif', fontSize: '1.1rem' }}>
+              <Briefcase size={16} style={{ color: '#906a47' }} /> Demanda por cliente
+            </h2>
+            <Link to="/clients" className="text-sm flex items-center gap-1 hover:underline" style={{ color: '#906a47' }}>
+              Ver clientes <ArrowRight size={14} />
+            </Link>
+          </div>
+          <div className="space-y-3">
+            {data.byClient.map((c, i) => {
+              const max = data.byClient[0]?.total || 1;
+              const pct = Math.round((c.total / max) * 100);
+              return (
+                <div key={c.id}>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-sm font-medium truncate" style={{ color: '#2e313c', maxWidth: '55%' }}>
+                      <span className="text-xs mr-2" style={{ color: '#c4a882' }}>#{i + 1}</span>{c.name}
+                    </span>
+                    <div className="flex items-center gap-3 text-xs" style={{ color: '#906a47' }}>
+                      <span>{c.total} tarefa{c.total !== '1' ? 's' : ''}</span>
+                      {parseInt(c.atrasadas) > 0 && (
+                        <span className="px-1.5 py-0.5 rounded-full text-white" style={{ backgroundColor: '#7a3a2a' }}>
+                          {c.atrasadas} atrasada{parseInt(c.atrasadas) !== 1 ? 's' : ''}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div className="h-1.5 rounded-full overflow-hidden" style={{ backgroundColor: '#e7e6e4' }}>
+                    <div className="h-full rounded-full transition-all" style={{ width: `${pct}%`, backgroundColor: parseInt(c.atrasadas) > 0 ? '#7a3a2a' : '#906a47' }} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
       <div className="rounded-xl shadow-sm border p-5" style={{ backgroundColor: '#f4e4c3', borderColor: '#d4c4a8' }}>
         <div className="flex items-center justify-between mb-4">
           <h2 className="font-semibold" style={{ color: '#2e313c', fontFamily: 'Cormorant Garamond, serif', fontSize: '1.1rem' }}>Tarefas com prazo próximo</h2>
@@ -79,3 +118,4 @@ export default function Dashboard() {
     </div>
   );
 }
+
