@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import toast from 'react-hot-toast';
-import { CheckSquare } from 'lucide-react';
+import emmiLogo from '../logo-emmi-claro.png';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -25,45 +25,46 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-indigo-100">
-      <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md">
-        <div className="flex items-center gap-3 mb-8">
-          <div className="bg-primary-500 p-2 rounded-xl">
-            <CheckSquare className="text-white" size={28} />
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">Task Manager</h1>
-            <p className="text-gray-500 text-sm">Escritório</p>
-          </div>
+    <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#2e313c' }}>
+      <div className="rounded-2xl shadow-xl p-8 w-full max-w-md" style={{ backgroundColor: '#f4e4c3' }}>
+
+        <div className="flex flex-col items-center mb-8">
+          <img src={emmiLogo} alt="Emmi Empresarial" style={{ width: '70%', height: 'auto', filter: 'brightness(0.2)' }} />
+          <p className="text-sm mt-3" style={{ color: '#906a47', letterSpacing: '0.08em' }}>GERENCIADOR DE TAREFAS</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">E-mail</label>
+            <label className="block text-sm font-medium mb-1" style={{ color: '#2e313c' }}>E-mail</label>
             <input
               type="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 text-sm"
+              style={{ border: '1px solid #d4c4a8', backgroundColor: '#fff', '--tw-ring-color': '#906a47' }}
               placeholder="seu@email.com"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+            <label className="block text-sm font-medium mb-1" style={{ color: '#2e313c' }}>Senha</label>
             <input
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
-              className="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 text-sm"
+              style={{ border: '1px solid #d4c4a8', backgroundColor: '#fff' }}
               placeholder="••••••••"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-primary-500 hover:bg-primary-600 text-white font-semibold py-2.5 rounded-lg transition disabled:opacity-50"
+            className="w-full text-white font-medium py-2.5 rounded-lg transition disabled:opacity-50 mt-2"
+            style={{ backgroundColor: '#906a47' }}
+            onMouseEnter={e => e.currentTarget.style.backgroundColor = '#7a5a3a'}
+            onMouseLeave={e => e.currentTarget.style.backgroundColor = '#906a47'}
           >
             {loading ? 'Entrando...' : 'Entrar'}
           </button>
