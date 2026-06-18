@@ -5,7 +5,14 @@ const cron = require('node-cron');
 const { checkOverdueTasks, checkUpcomingTasks } = require('./services/notifications');
 
 const app = express();
-app.use(cors({ origin: process.env.FRONTEND_URL || '*' }));
+app.use(cors({
+  origin: [
+    process.env.FRONTEND_URL,
+    'https://task-manager-emmi.vercel.app',
+    'http://localhost:3000'
+  ].filter(Boolean),
+  credentials: true
+}));
 app.use(express.json());
 
 app.use('/api/auth', require('./routes/auth'));
