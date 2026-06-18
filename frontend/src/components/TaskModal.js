@@ -6,7 +6,7 @@ import { X } from 'lucide-react';
 export default function TaskModal({ task, onClose, onSave }) {
   const [form, setForm] = useState({
     title: '', description: '', priority: 'medium',
-    due_date: '', category_id: '', assigned_to: '', status: 'pending',
+    due_date: '', category_id: '', assigned_to: '', status: 'pending', client_id: '',
   });
   const [categories, setCategories] = useState([]);
   const [users, setUsers] = useState([]);
@@ -24,6 +24,7 @@ export default function TaskModal({ task, onClose, onSave }) {
         category_id: task.category_id || '',
         assigned_to: task.assigned_to || '',
         status: task.status || 'pending',
+        client_id: task.client_id || '',
       });
     }
   }, [task]);

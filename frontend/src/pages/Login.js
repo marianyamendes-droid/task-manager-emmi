@@ -53,7 +53,7 @@ export default function Login() {
 
           <div className="mb-8">
             <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '2rem', fontWeight: 600, color: '#2e313c', lineHeight: 1.1 }}>
-              Bem-vinda,<br />Mariany
+              Bem-vindo
             </h2>
             <p className="mt-2 text-sm" style={{ color: '#906a47' }}>Acesse o gerenciador de tarefas</p>
           </div>

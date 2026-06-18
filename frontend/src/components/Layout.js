@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import api from '../api';
 import {
   LayoutDashboard, CheckSquare, Tag, BarChart2,
-  Bell, LogOut, Menu, X, Users
+  Bell, LogOut, Menu, X, Users, Briefcase
 } from 'lucide-react';
 import emmiLogo from '../logo-emmi-claro.png';
 
@@ -12,6 +12,7 @@ const navItems = [
   { to: '/', icon: LayoutDashboard, label: 'Dashboard' },
   { to: '/tasks', icon: CheckSquare, label: 'Tarefas' },
   { to: '/categories', icon: Tag, label: 'Categorias' },
+  { to: '/clients', icon: Briefcase, label: 'Clientes' },
   { to: '/reports', icon: BarChart2, label: 'Relatórios' },
   { to: '/users', icon: Users, label: 'Usuários' },
 ];

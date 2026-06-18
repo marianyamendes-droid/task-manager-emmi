@@ -9,6 +9,7 @@ import Tasks from './pages/Tasks';
 import Categories from './pages/Categories';
 import Reports from './pages/Reports';
 import Users from './pages/Users';
+import Clients from './pages/Clients';
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth();
@@ -25,6 +26,7 @@ function AppRoutes() {
       <Route path="/categories" element={<PrivateRoute><Layout><Categories /></Layout></PrivateRoute>} />
       <Route path="/reports" element={<PrivateRoute><Layout><Reports /></Layout></PrivateRoute>} />
       <Route path="/users" element={<PrivateRoute><Layout><Users /></Layout></PrivateRoute>} />
+      <Route path="/clients" element={<PrivateRoute><Layout><Clients /></Layout></PrivateRoute>} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
