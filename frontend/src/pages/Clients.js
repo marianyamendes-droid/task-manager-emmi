@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api';
 import toast from 'react-hot-toast';
-import { Plus, X, Pencil, Trash2, ChevronDown, ChevronUp, CheckCircle, Clock } from 'lucide-react';
+import { Plus, X, Pencil, Trash2, ChevronDown, ChevronUp } from 'lucide-react';
 import TaskModal from '../components/TaskModal';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
